@@ -1,0 +1,39 @@
+GET http://127.0.0.1:5678/health HTTP/1.1
+### Успешное создание кошелька
+POST http://127.0.0.1:5678/api/v1/wallet HTTP/1.1
+### Успешная отправка
+POST http://127.0.0.1:5678/api/v1/wallet/44860474-d451-44a1-9259-19e2c9983604/send
+content-type: application/json
+
+{
+    "to": "414f6ae3-e22c-4f21-9c78-cc4d036a0a72",
+    "amount" : 30.0
+}
+### Ошибка, при некорректном вводе параметра id кошелька
+POST http://127.0.0.1:5678/api/v1/wallet/44860474-d451-44a1/send
+content-type: application/json
+
+{
+    "to": "414f6ae3-e22c-4f21-9c78-cc4d036a0a72",
+    "amount" : 30.0
+}
+### Ошибка, при корректном, но не существующем id кошелька в параметре
+POST http://127.0.0.1:5678/api/v1/wallet/44860474-d451-44a1-9259-19e2c9983601/send
+content-type: application/json
+
+{
+    "to": "414f6ae3-e22c-4f21-9c78-cc4d036a0a72",
+    "amount" : 30.0
+}
+### Ошибка, при отправке денег в несуществующий кошелек
+POST http://127.0.0.1:5678/api/v1/wallet/44860474-d451-44a1-9259-19e2c998360/send
+content-type: application/json
+
+{
+    "to": "414f6ae3-e22c-4f21-9c78-cc4d036a0a34",
+    "amount" : 30.0
+}
+### Получение истории транзакций
+GET http://127.0.0.1:5678/api/v1/wallet/44860474-d451-44a1-9259-19e2c9983604/history HTTP/1.1
+### Получение информации о кошельке
+GET http://127.0.0.1:5678/api/v1/wallet/44860474-d451-44a1-9259-19e2c9983604 HTTP/1.1
